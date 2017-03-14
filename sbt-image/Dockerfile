@@ -3,7 +3,18 @@ MAINTAINER David Garcia <david.garcia.alvarez.93@gmail.com>
 
 ENV SBT_VERSION 0.13.8
 ENV SBT_HOME /usr/local/sbt
-ENV PATH ${PATH}:${SBT_HOME}/bin
+ENV SCALA_VERSION 2.10.4
+ENV SCALA_HOME /usr/local/scala-${SCALA_VERSION}
+ENV PATH ${PATH}:${SCALA_HOME}/bin:${SBT_HOME}/bin
+
+# Install Scala
+## Piping curl directly in tar
+RUN \
+  wget "http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz" && \
+  tar -xvzf scala-${SCALA_VERSION}.tgz  && \
+  cp -a scala-${SCALA_VERSION}/* /usr/local && rm -rf scala-${SCALA_VERSION} && \
+  echo >> /root/.bashrc && \
+  echo -ne "- with scala $SCALA_VERSION\n" >> /root/.built
 
 # Install sbt
 RUN apk add --no-cache --update bash && \
