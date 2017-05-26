@@ -46,7 +46,6 @@ git-client
 git-server
 workflow-cps-global-lib
 branch-api
-workflow-multibranch
 durable-task
 workflow-durable-task-step
 workflow-aggregator
